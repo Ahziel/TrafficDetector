@@ -1,16 +1,21 @@
 #ifndef PROJECTMODEL_H
 #define PROJECTMODEL_H
 
-//#include <QVideo>
+#include <QString>
 
 class ProjectModel
 {
 private:
-//    QVideo video;
-
+    QString m_configFileLocation;
+    QString m_videoFileLocation;
+    QString m_name;
 
 public:
-    ProjectModel();
+    ProjectModel(QString name, QString videoFileLocation);
+    ProjectModel(QString configFileLocation);
+
+    bool loadConfig();
+    bool saveConfig();
 
 };
 
