@@ -640,7 +640,6 @@ HEADERS  += models/projectmodel.h \
     processing/qtipl.h \
     views/mainwindow.h \
     player.h \
-    processing/BackgroundDetector_copy.h \
     processing/player.h \
     qtmultimedia-opensource-src-5.3.2/debian/qtmultimedia5-dev/usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qabstractvideobuffer.h \
     qtmultimedia-opensource-src-5.3.2/debian/qtmultimedia5-dev/usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qabstractvideosurface.h \

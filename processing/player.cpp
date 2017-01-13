@@ -7,16 +7,17 @@ Player::Player(QObject *parent)
 }
 
 bool Player::loadVideo(string filename) {
-    capture.open(filename);
-    if (capture.isOpened())
+
+    capture  =  new cv::VideoCapture(filename);
+
+    if (capture->isOpened())
     {
-        frameRate = (int) capture.get(CV_CAP_PROP_FPS);
+        frameRate = (int) capture->get(CV_CAP_PROP_FPS);
         return true;
     }
     else
         return false;
 }
-
 
 void Player::Play()
 {
@@ -32,7 +33,7 @@ void Player::run()
 {
     int delay = (1000/frameRate);
     while(!stop){
-        if (!capture.read(frame))
+        if (!capture->read(frame))
         {
             stop = true;
         }
@@ -55,7 +56,8 @@ Player::~Player()
 {
     mutex.lock();
     stop = true;
-    capture.release();
+    capture->release();
+    delete capture;
     condition.wakeOne();
     mutex.unlock();
     wait();
@@ -70,4 +72,23 @@ void Player::msleep(int ms){
 }
 bool Player::isStopped() const{
     return this->stop;
+}
+
+double Player::getCurrentFrame(){
+
+    return capture->get(CV_CAP_PROP_POS_FRAMES);
+}
+
+double Player::getNumberOfFrames(){
+
+    return capture->get(CV_CAP_PROP_FRAME_COUNT);
+}
+
+double Player::getFrameRate(){
+    return frameRate;
+}
+
+void Player::setCurrentFrame( int frameNumber )
+{
+    capture->set(CV_CAP_PROP_POS_FRAMES, frameNumber);
 }

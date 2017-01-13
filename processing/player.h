@@ -1,6 +1,5 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-
 #include <QMutex>
 #include <QThread>
 #include <QImage>
@@ -11,8 +10,9 @@
 
 using namespace cv;
 
-class Player : public QThread
-{    Q_OBJECT
+class Player : public QThread        
+{
+    Q_OBJECT
 
  private:
 
@@ -21,7 +21,7 @@ class Player : public QThread
     QWaitCondition condition;
     Mat frame;
     int frameRate;
-    VideoCapture capture;
+    VideoCapture *capture;
     Mat RGBframe;
     QImage img;
 
@@ -49,5 +49,10 @@ class Player : public QThread
     void Stop();
     //check if the player has been stopped
     bool isStopped() const;
+    void setCurrentFrame( int frameNumber);
+    //
+    double getFrameRate();
+    double getCurrentFrame();
+    double getNumberOfFrames();
 };
 #endif // VIDEOPLAYER_H
