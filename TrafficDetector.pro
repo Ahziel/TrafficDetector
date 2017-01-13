@@ -19,6 +19,7 @@ SOURCES += main.cpp\
     processing/qtipl.cpp \
     views/mainwindow.cpp \
     processing/player.cpp \
+    processing/controller.cpp
 
 
 FORMS    += views/mainwindow.ui
@@ -33,6 +34,7 @@ HEADERS += \
     processing/MotionDetector.h \
     processing/player.h \
     processing/qtipl.h \
-    views/mainwindow.h
+    views/mainwindow.h \
+    processing/controller.h
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000

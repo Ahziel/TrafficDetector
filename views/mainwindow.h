@@ -18,6 +18,19 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    void createConnection();
+
+public slots:
+    void viewOnClickedLoad();
+    void viewOnClickedPlay();
+    void viewOnClickedPause();
+
+signals :
+    void viewClickedLoad();
+    void viewClickedPlay();
+    void viewClickedPause();
+
 };
 
 #endif // MAINWINDOW_H
