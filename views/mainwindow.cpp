@@ -18,7 +18,7 @@ void MainWindow::createConnection()
 {
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
-    connect(ui->pauseButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPause());
+    connect(ui->pauseButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPause()));
 }
 
 void MainWindow::viewOnClickedLoad()
