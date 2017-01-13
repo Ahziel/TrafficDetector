@@ -1,4 +1,4 @@
-#include "MotionDetector.h" 
+#include "processing/MotionDetector.h"
 
 CMotionDetector::CMotionDetector()
 {

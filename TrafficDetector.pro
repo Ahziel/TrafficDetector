@@ -13,17 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    BackgroundDetector.cpp \
-    MotionDetector.cpp \
-    qtipl.cpp
+    models/projectmodel.cpp \
+    processing/BackgroundDetector.cpp \
+    processing/MotionDetector.cpp \
+    processing/qtipl.cpp \
+    views/mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    BackgroundDetector.h \
-    MotionDetector.h \
-    qtipl.h
+HEADERS  += models/projectmodel.h \
+    processing/BackgroundDetector.h \
+    processing/MotionDetector.h \
+    processing/qtipl.h \
+    views/mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += views/mainwindow.ui
 
 INCLUDEPATH += /usr/include/opencv
 

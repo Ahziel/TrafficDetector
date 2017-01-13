@@ -1,4 +1,4 @@
-#include "BackgroundDetector.h" 
+#include "processing/BackgroundDetector.h"
 
 CBackgroundDetector::CBackgroundDetector() : m_pImageRef(NULL), m_fGamma((float)0.9)
 {

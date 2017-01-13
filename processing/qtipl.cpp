@@ -7,7 +7,7 @@
 * Authors  : Rémi Ronfard, David Knossow and Matthieu Guilbert  *
 *---------------------------------------------------------------*/
 
-#include "qtipl.h"
+#include "processing/qtipl.h"
 
 inline int align(int size, int align)
 {
