@@ -19,6 +19,7 @@ signals:
     void controlErrorLoad();
     void controlSuccededLoad(QString filename, double numberOfFrames, double frameRate);
     void controlChangeButtonPlay(bool play);
+    void controlUpdatePlayer(QImage img, double currentFrame);
 
 
 public slots:
@@ -26,6 +27,7 @@ public slots:
     void controlOnClickedPlay();
     void controlOnClickedPause();
     void controlOnProcessedImage();
+    void controlOnUpdatePlayer(QImage img);
     void controlOnGetNameVideo(QString filename);
 
 private :

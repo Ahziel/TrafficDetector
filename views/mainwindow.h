@@ -34,6 +34,7 @@ public slots:
     void viewOnErrorLoad();
     void viewOnChangeButtonPlay(bool);
     void viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate);
+    void viewOnUpdatePlayer(QImage img, double currentFrame);
 
 signals :
     void viewClickedLoad();

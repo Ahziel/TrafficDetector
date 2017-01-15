@@ -16,6 +16,8 @@ void Controller::createConnection()
     connect(this,SIGNAL(controlSuccededLoad(QString,double,double)),&m_window,SLOT(viewOnSuccededLoad(QString,double,double)));
     connect(&m_window,SIGNAL(viewClickedPlay()),this,SLOT(controlOnClickedPlay()));
     connect(this,SIGNAL(controlChangeButtonPlay(bool)),&m_window,SLOT(viewOnChangeButtonPlay(bool)));
+    connect(m_player, SIGNAL(processedImage(QImage)),this, SLOT(controlOnUpdatePlayer(QImage)));
+    connect(this,SIGNAL(controlUpdatePlayer(QImage,double)),&m_window,SLOT(viewOnUpdatePlayer(QImage,double)));
 }
 
 void Controller::startApplication()
@@ -50,6 +52,14 @@ void Controller::controlOnClickedPause()
 void Controller::controlOnProcessedImage()
 {
 
+}
+
+void Controller::controlOnUpdatePlayer(QImage img)
+{
+    if (!img.isNull())
+        {
+            emit controlUpdatePlayer(img,m_player->getCurrentFrame());
+        }
 }
 
 void Controller::controlOnGetNameVideo(QString filename)

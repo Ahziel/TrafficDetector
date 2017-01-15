@@ -71,3 +71,10 @@ void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, dou
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
 }
+
+void MainWindow::viewOnUpdatePlayer(QImage img, double currentFrame)
+{
+    ui->video->setAlignment(Qt::AlignCenter);
+    ui->video->setPixmap(QPixmap::fromImage(img).scaled(ui->video->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
+    ui->horizontalSlider->setValue(currentFrame);
+}
