@@ -18,6 +18,7 @@ signals:
     void controlOpenLoadVideo();
     void controlErrorLoad();
     void controlSuccededLoad(QString filename, double numberOfFrames, double frameRate);
+    void controlChangeButtonPlay(bool play);
 
 
 public slots:

@@ -18,7 +18,6 @@ void MainWindow::createConnection()
 {
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
-    connect(ui->pauseButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPause()));
 }
 
 void MainWindow::viewOnClickedLoad()
@@ -53,12 +52,22 @@ void MainWindow::viewOnErrorLoad()
     msgBox.exec();
 }
 
+void MainWindow::viewOnChangeButtonPlay(bool play)
+{
+    if (play)
+    {
+        ui->playButton->setText(tr("Stop"));
+    }else
+    {
+        ui->playButton->setText(tr("Play"));
+    }
+}
+
 void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate)
 {
     QFileInfo name = filename;
     this->setWindowTitle(name.fileName());
     ui->playButton->setEnabled(true);
-    ui->pauseButton->setEnabled(true);
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
 }

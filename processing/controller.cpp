@@ -14,6 +14,8 @@ void Controller::createConnection()
     connect(&m_window,SIGNAL(viewGetNameVideoLoad(QString)),this , SLOT(controlOnGetNameVideo(QString)));
     connect(this,SIGNAL(controlErrorLoad()),&m_window,SLOT(viewOnErrorLoad()));
     connect(this,SIGNAL(controlSuccededLoad(QString,double,double)),&m_window,SLOT(viewOnSuccededLoad(QString,double,double)));
+    connect(&m_window,SIGNAL(viewClickedPlay()),this,SLOT(controlOnClickedPlay()));
+    connect(this,SIGNAL(controlChangeButtonPlay(bool)),&m_window,SLOT(viewOnChangeButtonPlay(bool)));
 }
 
 void Controller::startApplication()
@@ -28,7 +30,16 @@ void Controller::controlOnClickedLoad()
 
 void Controller::controlOnClickedPlay()
 {
-
+    bool play = true;
+    if (m_player->isStopped())
+    {
+        m_player->Play();
+        play = false;
+    }else
+    {
+        m_player->Stop();
+    }
+    emit controlChangeButtonPlay(play);
 }
 
 void Controller::controlOnClickedPause()

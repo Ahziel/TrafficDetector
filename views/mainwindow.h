@@ -32,6 +32,7 @@ public slots:
     void viewOnClickedPause();
     void viewOnLoadVideo();
     void viewOnErrorLoad();
+    void viewOnChangeButtonPlay(bool);
     void viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate);
 
 signals :
