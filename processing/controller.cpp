@@ -44,16 +44,6 @@ void Controller::controlOnClickedPlay()
     emit controlChangeButtonPlay(play);
 }
 
-void Controller::controlOnClickedPause()
-{
-
-}
-
-void Controller::controlOnProcessedImage()
-{
-
-}
-
 void Controller::controlOnUpdatePlayer(QImage img)
 {
     if (!img.isNull())

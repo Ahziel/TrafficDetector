@@ -25,6 +25,7 @@ private:
     Ui::MainWindow *ui;
 
     void createConnection();
+    void creation();
 
 public slots:
     void viewOnClickedLoad();

@@ -25,8 +25,6 @@ signals:
 public slots:
     void controlOnClickedLoad();
     void controlOnClickedPlay();
-    void controlOnClickedPause();
-    void controlOnProcessedImage();
     void controlOnUpdatePlayer(QImage img);
     void controlOnGetNameVideo(QString filename);
 

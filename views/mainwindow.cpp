@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    creation();
     createConnection();
 }
 
@@ -18,6 +19,12 @@ void MainWindow::createConnection()
 {
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
+}
+
+void MainWindow::creation()
+{
+    ui->playButton->setEnabled(false);
+    ui->horizontalSlider->setEnabled(false);
 }
 
 void MainWindow::viewOnClickedLoad()
@@ -56,10 +63,10 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
 {
     if (play)
     {
-        ui->playButton->setText(tr("Stop"));
+        ui->playButton->setText(tr("Play"));
     }else
     {
-        ui->playButton->setText(tr("Play"));
+        ui->playButton->setText(tr("Stop"));
     }
 }
 
