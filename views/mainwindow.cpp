@@ -23,15 +23,42 @@ void MainWindow::createConnection()
 
 void MainWindow::viewOnClickedLoad()
 {
-    emit viewOnClickedLoad();
+    emit viewClickedLoad();
 }
 
 void MainWindow::viewOnClickedPlay()
 {
-    emit viewOnClickedPlay();
+    emit viewClickedPlay();
 }
 
 void MainWindow::viewOnClickedPause()
 {
-    emit viewOnClickedPause();
+    emit viewClickedPause();
+}
+
+void MainWindow::viewOnLoadVideo()
+{
+    QString filename = QFileDialog::getOpenFileName(this,
+                                              tr("Open Video"), ".",
+                                              tr("Video Files (*.avi *.mpg *.mp4)"));
+
+
+    emit viewGetNameVideoLoad(filename);
+}
+
+void MainWindow::viewOnErrorLoad()
+{
+    QMessageBox msgBox;
+    msgBox.setText("The selected video could not be opened!");
+    msgBox.exec();
+}
+
+void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate)
+{
+    QFileInfo name = filename;
+    this->setWindowTitle(name.fileName());
+    ui->playButton->setEnabled(true);
+    ui->pauseButton->setEnabled(true);
+    ui->horizontalSlider->setEnabled(true);
+    ui->horizontalSlider->setMaximum(numberOfFrames);
 }

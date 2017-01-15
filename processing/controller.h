@@ -15,12 +15,17 @@ public:
     void startApplication();
 
 signals:
+    void controlOpenLoadVideo();
+    void controlErrorLoad();
+    void controlSuccededLoad(QString filename, double numberOfFrames, double frameRate);
+
 
 public slots:
     void controlOnClickedLoad();
     void controlOnClickedPlay();
     void controlOnClickedPause();
     void controlOnProcessedImage();
+    void controlOnGetNameVideo(QString filename);
 
 private :
     MainWindow m_window;

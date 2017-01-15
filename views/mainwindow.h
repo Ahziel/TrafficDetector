@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QString>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QMessageBox>
+#include <QTime>
 
 
 namespace Ui {
@@ -25,11 +30,16 @@ public slots:
     void viewOnClickedLoad();
     void viewOnClickedPlay();
     void viewOnClickedPause();
+    void viewOnLoadVideo();
+    void viewOnErrorLoad();
+    void viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate);
 
 signals :
     void viewClickedLoad();
     void viewClickedPlay();
     void viewClickedPause();
+    void viewGetNameVideoLoad(QString filename);
+
 
 };
 
