@@ -7,6 +7,11 @@ Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), 
     createConnection();
 }
 
+Controller::~Controller()
+{
+    delete m_player;
+}
+
 void Controller::createConnection()
 {
     connect(&m_window,SIGNAL(viewClickedLoad()),this,SLOT(controlOnClickedLoad()));

@@ -10,6 +10,7 @@ class Controller : public QObject
     Q_OBJECT
 public:
     Controller(MainWindow* window,QObject *parent = 0);
+    ~Controller();
 
     void createConnection();
     void startApplication();
