@@ -13,13 +13,14 @@ public:
 
     void createConnection();
     void startApplication();
+    QString getFormattedTime(int timeInSeconds);
 
 signals:
     void controlOpenLoadVideo();
     void controlErrorLoad();
-    void controlSuccededLoad(QString filename, double numberOfFrames, double frameRate);
+    void controlSuccededLoad(QString filename, double numberOfFrames, QString formatedTime);
     void controlChangeButtonPlay(bool play);
-    void controlUpdatePlayer(QImage img, double currentFrame);
+    void controlUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
 
 
 public slots:
@@ -31,6 +32,8 @@ public slots:
 private :
     MainWindow m_window;
     Player *m_player;
+
+
 
 };
 

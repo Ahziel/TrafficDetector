@@ -25,6 +25,8 @@ void MainWindow::creation()
 {
     ui->playButton->setEnabled(false);
     ui->horizontalSlider->setEnabled(false);
+    ui->totalTime->setText("0:00:00");
+    ui->currentTime->setText("0:00:00");
 }
 
 void MainWindow::viewOnClickedLoad()
@@ -70,18 +72,20 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
     }
 }
 
-void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, double frameRate)
+void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, QString formatedTime)
 {
     QFileInfo name = filename;
     this->setWindowTitle(name.fileName());
     ui->playButton->setEnabled(true);
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
+    ui->totalTime->setText(formatedTime);
 }
 
-void MainWindow::viewOnUpdatePlayer(QImage img, double currentFrame)
+void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText)
 {
     ui->video->setAlignment(Qt::AlignCenter);
     ui->video->setPixmap(QPixmap::fromImage(img).scaled(ui->video->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
     ui->horizontalSlider->setValue(currentFrame);
+    ui->currentTime->setText(currentFrameText);
 }
