@@ -19,6 +19,9 @@ void MainWindow::createConnection()
 {
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
+    connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
+    connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
+    connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
 }
 
 void MainWindow::creation()
@@ -72,6 +75,22 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
     }
 }
 
+void MainWindow::viewOnSliderPressed()
+{
+    emit viewSliderPressed();
+}
+
+void MainWindow::viewOnSliderReleased()
+{
+    emit viewSliderReleased();
+}
+
+void MainWindow::viewOnSliderMoved(int current)
+{
+    emit viewSliderMoved(current);
+}
+
+
 void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, QString formatedTime)
 {
     QFileInfo name = filename;
@@ -88,4 +107,9 @@ void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString curr
     ui->video->setPixmap(QPixmap::fromImage(img).scaled(ui->video->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
     ui->horizontalSlider->setValue(currentFrame);
     ui->currentTime->setText(currentFrameText);
+}
+
+void MainWindow::viewOnFrameChange(QString current)
+{
+    ui->currentTime->setText(current);
 }

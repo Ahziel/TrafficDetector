@@ -34,13 +34,20 @@ public slots:
     void viewOnLoadVideo();
     void viewOnErrorLoad();
     void viewOnChangeButtonPlay(bool);
+    void viewOnSliderPressed();
+    void viewOnSliderReleased();
+    void viewOnSliderMoved(int current);
     void viewOnSuccededLoad(QString filename, double numberOfFrames, QString formatedTime);
     void viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
+    void viewOnFrameChange(QString);
 
 signals :
     void viewClickedLoad();
     void viewClickedPlay();
     void viewClickedPause();
+    void viewSliderPressed();
+    void viewSliderReleased();
+    void viewSliderMoved(int);
     void viewGetNameVideoLoad(QString filename);
 
 

@@ -22,11 +22,15 @@ signals:
     void controlSuccededLoad(QString filename, double numberOfFrames, QString formatedTime);
     void controlChangeButtonPlay(bool play);
     void controlUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
+    void controlFrameChange(QString placement);
 
 
 public slots:
     void controlOnClickedLoad();
     void controlOnClickedPlay();
+    void controlOnSliderPressed();
+    void controlOnSliderReleased();
+    void controlOnSliderMoved(int);
     void controlOnUpdatePlayer(QImage img);
     void controlOnGetNameVideo(QString filename);
 

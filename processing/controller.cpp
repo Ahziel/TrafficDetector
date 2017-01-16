@@ -1,4 +1,5 @@
 #include "controller.h"
+#include <iostream>
 
 
 Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), m_window(window)
@@ -23,6 +24,10 @@ void Controller::createConnection()
     connect(this,SIGNAL(controlChangeButtonPlay(bool)),&m_window,SLOT(viewOnChangeButtonPlay(bool)));
     connect(m_player, SIGNAL(processedImage(QImage)),this, SLOT(controlOnUpdatePlayer(QImage)));
     connect(this,SIGNAL(controlUpdatePlayer(QImage,double,QString)),&m_window,SLOT(viewOnUpdatePlayer(QImage,double,QString)));
+    connect(&m_window,SIGNAL(viewSliderPressed()),this,SLOT(controlOnSliderPressed()));
+    connect(&m_window,SIGNAL(viewSliderReleased()),this,SLOT(controlOnSliderReleased()));
+    connect(&m_window,SIGNAL(viewSliderMoved(int)),this,SLOT(controlOnSliderMoved(int)));
+    connect(this,SIGNAL(controlFrameChange(QString)),&m_window,SLOT(viewOnFrameChange(QString)));
 }
 
 void Controller::startApplication()
@@ -62,6 +67,23 @@ void Controller::controlOnClickedPlay()
     }
     emit controlChangeButtonPlay(play);
 }
+
+void Controller::controlOnSliderPressed()
+{
+    m_player->Stop();
+}
+
+void Controller::controlOnSliderReleased()
+{
+    m_player->Play();
+}
+
+void Controller::controlOnSliderMoved(int current)
+{
+    m_player->setCurrentFrame(current);
+    emit controlFrameChange(getFormattedTime(current/(int)m_player->getFrameRate()));
+}
+
 
 void Controller::controlOnUpdatePlayer(QImage img)
 {
