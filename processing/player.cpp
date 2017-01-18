@@ -12,7 +12,8 @@ bool Player::loadVideo(string filename) {
 
     if (capture->isOpened())
     {
-        frameRate = (int) capture->get(CV_CAP_PROP_FPS);
+        originalFrameRate = (int) capture->get(CV_CAP_PROP_FPS);
+        frameRate = originalFrameRate;
         return true;
     }
     else

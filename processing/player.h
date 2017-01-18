@@ -20,6 +20,7 @@ class Player : public QThread
     QMutex mutex;
     QWaitCondition condition;
     Mat frame;
+    int originalFrameRate;
     int frameRate;
     VideoCapture *capture;
     Mat RGBframe;
@@ -51,6 +52,7 @@ class Player : public QThread
     bool isStopped() const;
     void setCurrentFrame( int frameNumber);
     //
+    void setFrameRate();
     double getFrameRate();
     double getCurrentFrame();
     double getNumberOfFrames();
