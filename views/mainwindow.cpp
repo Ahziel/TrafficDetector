@@ -70,9 +70,11 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
     if (play)
     {
         ui->playButton->setText(tr("Play"));
+        ui->playButton->setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)");
     }else
     {
         ui->playButton->setText(tr("Stop"));
+        ui->playButton->setStyleSheet("background-color: rgb(255, 0, 0); color: rgb(0, 0, 0)");
     }
 }
 
@@ -100,6 +102,7 @@ void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, QSt
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
     ui->totalTime->setText(formatedTime);
+    ui->playButton->setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)");
 }
 
 void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText)
