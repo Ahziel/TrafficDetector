@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     processing/qtipl.cpp \
     views/mainwindow.cpp \
     processing/player.cpp \
-    controllers/controller.cpp
+    controllers/controller.cpp \
+    processing/trafficdetector.cpp
 
 
 FORMS    += views/mainwindow.ui
@@ -35,6 +36,7 @@ HEADERS += \
     processing/player.h \
     processing/qtipl.h \
     views/mainwindow.h \
-    controllers/controller.h
+    controllers/controller.h \
+    processing/trafficdetector.h
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
