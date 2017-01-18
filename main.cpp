@@ -1,7 +1,7 @@
 #include "views/mainwindow.h"
 #include <QApplication>
 
-#include "processing/controller.h"
+#include "controllers/controller.h"
 #include "models/projectmodel.h"
 #include "processing/BackgroundDetector.h"
 #include "processing/qtipl.h"

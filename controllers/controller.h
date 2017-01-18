@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "views/mainwindow.h"
-#include "player.h"
+#include "processing/player.h"
 
 class Controller : public QObject
 {
