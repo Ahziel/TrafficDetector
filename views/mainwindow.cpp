@@ -22,6 +22,7 @@ void MainWindow::createConnection()
     connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
     connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
     connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
+    connect(ui->frameRate,SIGNAL(valueChanged(double)),this,SLOT(viewOnChangeFrameRate(double)));
 }
 
 void MainWindow::creation()
@@ -112,4 +113,9 @@ void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString curr
 void MainWindow::viewOnFrameChange(QString current)
 {
     ui->currentTime->setText(current);
+}
+
+void MainWindow::viewOnChangeFrameRate(double val)
+{
+    emit viewChangeFrameRate(val);
 }

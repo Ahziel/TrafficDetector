@@ -28,6 +28,7 @@ void Controller::createConnection()
     connect(&m_window,SIGNAL(viewSliderReleased()),this,SLOT(controlOnSliderReleased()));
     connect(&m_window,SIGNAL(viewSliderMoved(int)),this,SLOT(controlOnSliderMoved(int)));
     connect(this,SIGNAL(controlFrameChange(QString)),&m_window,SLOT(viewOnFrameChange(QString)));
+    connect(&m_window,SIGNAL(viewChangeFrameRate(double)),this,SLOT(controlOnChangeFrameRate(double)));
 }
 
 void Controller::startApplication()
@@ -103,5 +104,10 @@ void Controller::controlOnGetNameVideo(QString filename)
             else{
                 emit controlSuccededLoad(filename,m_player->getNumberOfFrames(),getFormattedTime( (int)m_player->getNumberOfFrames()/(int)m_player->getFrameRate()));
             }
-        }
+    }
+}
+
+void Controller::controlOnChangeFrameRate(double val)
+{
+    m_player->setFrameRate(val*m_player->getOriginalFrameRate());
 }

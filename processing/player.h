@@ -52,8 +52,9 @@ class Player : public QThread
     bool isStopped() const;
     void setCurrentFrame( int frameNumber);
     //
-    void setFrameRate();
+    void setFrameRate(int val);
     double getFrameRate();
+    double getOriginalFrameRate();
     double getCurrentFrame();
     double getNumberOfFrames();
 };

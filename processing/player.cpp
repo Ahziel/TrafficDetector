@@ -32,7 +32,7 @@ void Player::Play()
 
 void Player::run()
 {
-    int delay = (1000/frameRate);
+    //int delay = ;
     while(!stop){
         if (!capture->read(frame))
         {
@@ -49,7 +49,7 @@ void Player::run()
                                  frame.cols,frame.rows,QImage::Format_Indexed8);
         }
         emit processedImage(img);
-        this->msleep(delay);
+        this->msleep((1000/frameRate));
     }
 }
 
@@ -89,7 +89,17 @@ double Player::getFrameRate(){
     return frameRate;
 }
 
+double Player::getOriginalFrameRate()
+{
+    return originalFrameRate;
+}
+
 void Player::setCurrentFrame( int frameNumber )
 {
     capture->set(CV_CAP_PROP_POS_FRAMES, frameNumber);
+}
+
+void Player::setFrameRate(int val)
+{
+    frameRate = val;
 }

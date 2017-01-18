@@ -33,6 +33,7 @@ public slots:
     void controlOnSliderMoved(int);
     void controlOnUpdatePlayer(QImage img);
     void controlOnGetNameVideo(QString filename);
+    void controlOnChangeFrameRate(double);
 
 private :
     MainWindow m_window;
