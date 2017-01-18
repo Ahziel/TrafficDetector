@@ -90,7 +90,7 @@ void Controller::controlOnUpdatePlayer(QImage img)
 {
     if (!img.isNull())
         {
-            emit controlUpdatePlayer(img,m_player->getCurrentFrame(),getFormattedTime( (int)m_player->getCurrentFrame()/(int)m_player->getFrameRate()));
+            emit controlUpdatePlayer(img,m_player->getCurrentFrame(),getFormattedTime( (int)m_player->getCurrentFrame()/(int)m_player->getOriginalFrameRate()));
         }
 }
 

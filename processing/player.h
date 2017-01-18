@@ -22,6 +22,7 @@ class Player : public QThread
     Mat frame;
     int originalFrameRate;
     int frameRate;
+    int currentFrame;
     VideoCapture *capture;
     Mat RGBframe;
     QImage img;
