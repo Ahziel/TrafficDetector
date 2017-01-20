@@ -31,6 +31,7 @@ class Player : public QThread
 
  //Signal to output frame to be displayed
       void processedImage(const QImage &image);
+      void sendFrameToProcess(QImage* frame);
 
  protected:
 

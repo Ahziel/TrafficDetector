@@ -2,19 +2,22 @@
 #include "BackgroundDetector.h"
 #include "qtipl.h"
 
+#include <QDebug>
+
 TrafficDetector::TrafficDetector(QObject *parent) : QObject(parent)
 {
 
 }
 
 void TrafficDetector::receiveFrameToProcess(QImage* frame){
-    IplImage* processedFrame = QImageToIplImage(frame);
+//    IplImage* processedFrame = QImageToIplImage(frame);
 
-    CBackgroundDetector detector;
-    detector.newImage(processedFrame);
+//    CBackgroundDetector detector;
+//    detector.newImage(processedFrame);
 
-    uchar *data;
-    QImage *finalFrame = IplImageToQImage(processedFrame, &data);
+//    uchar *data;
+//    QImage *finalFrame = IplImageToQImage(processedFrame, &data);
 
-    emit sendProcessedFrame(finalFrame);
+    qDebug() << "coucou";
+    emit sendProcessedFrame(frame);
 }

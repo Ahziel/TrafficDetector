@@ -21,7 +21,7 @@ void MainWindow::createConnection()
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
     connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
     connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
-    connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
+    connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)), this, SLOT(viewOnSliderMoved(int)));
     connect(ui->frameRate,SIGNAL(valueChanged(double)),this,SLOT(viewOnChangeFrameRate(double)));
 }
 
@@ -111,6 +111,12 @@ void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString curr
     ui->video->setPixmap(QPixmap::fromImage(img).scaled(ui->video->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
     ui->horizontalSlider->setValue(currentFrame);
     ui->currentTime->setText(currentFrameText);
+}
+
+void MainWindow::viewOnProcessedFrame(QImage *frame)
+{
+    ui->video_2->setAlignment(Qt::AlignCenter);
+    ui->video_2->setPixmap(QPixmap::fromImage(*frame).scaled(ui->video_2->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
 }
 
 void MainWindow::viewOnFrameChange(QString current)
