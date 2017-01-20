@@ -40,7 +40,7 @@ public slots:
     void viewOnSuccededLoad(QString filename, double numberOfFrames, QString formatedTime);
     void viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
     void viewOnFrameChange(QString);
-    void viewOnChangeFrameRate(double);
+    void viewOnChangeFrameRate(QString);
 
 signals :
     void viewClickedLoad();
@@ -49,7 +49,7 @@ signals :
     void viewSliderPressed();
     void viewSliderReleased();
     void viewSliderMoved(int);
-    void viewChangeFrameRate(double);
+    void viewChangeFrameRate(QString);
     void viewGetNameVideoLoad(QString filename);
 
 

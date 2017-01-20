@@ -22,15 +22,23 @@ void MainWindow::createConnection()
     connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
     connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
     connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
-    connect(ui->frameRate,SIGNAL(valueChanged(double)),this,SLOT(viewOnChangeFrameRate(double)));
+    connect(ui->frameRate,SIGNAL(currentIndexChanged(QString)),this,SLOT(viewOnChangeFrameRate(QString)));
 }
 
 void MainWindow::creation()
 {
     ui->playButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
     ui->horizontalSlider->setEnabled(false);
     ui->totalTime->setText("0:00:00");
     ui->currentTime->setText("0:00:00");
+    QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+    QIcon ButtonIcon(pixmap);
+    ui->playButton->setIcon(ButtonIcon);
+    QPixmap pixmapStop("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/stop.png");
+    QIcon ButtonIconStop(pixmapStop);
+    ui->stopButton->setIcon(ButtonIconStop);
+
 }
 
 void MainWindow::viewOnClickedLoad()
@@ -69,12 +77,14 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
 {
     if (play)
     {
-        ui->playButton->setText(tr("Play"));
-        ui->playButton->setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)");
+        QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+        QIcon ButtonIcon(pixmap);
+        ui->playButton->setIcon(ButtonIcon);
     }else
     {
-        ui->playButton->setText(tr("Stop"));
-        ui->playButton->setStyleSheet("background-color: rgb(255, 0, 0); color: rgb(0, 0, 0)");
+        QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/pause.png");
+        QIcon ButtonIcon(pixmap);
+        ui->playButton->setIcon(ButtonIcon);
     }
 }
 
@@ -102,7 +112,6 @@ void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, QSt
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
     ui->totalTime->setText(formatedTime);
-    ui->playButton->setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)");
 }
 
 void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText)
@@ -118,7 +127,7 @@ void MainWindow::viewOnFrameChange(QString current)
     ui->currentTime->setText(current);
 }
 
-void MainWindow::viewOnChangeFrameRate(double val)
+void MainWindow::viewOnChangeFrameRate(QString val)
 {
     emit viewChangeFrameRate(val);
 }
