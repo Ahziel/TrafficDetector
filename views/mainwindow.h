@@ -39,6 +39,7 @@ public slots:
     void viewOnSliderMoved(int current);
     void viewOnSuccededLoad(QString filename, double numberOfFrames, QString formatedTime);
     void viewOnUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
+    void viewOnProcessedFrame(QImage* frame);
     void viewOnFrameChange(QString);
     void viewOnChangeFrameRate(QString);
 

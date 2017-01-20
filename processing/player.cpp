@@ -49,6 +49,7 @@ void Player::run()
                                  frame.cols,frame.rows,QImage::Format_Indexed8);
         }
         emit processedImage(img);
+        emit sendFrameToProcess(&img);
         this->msleep((1000/frameRate));
     }
 }

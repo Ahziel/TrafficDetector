@@ -5,12 +5,14 @@
 Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), m_window(window)
 {
     m_player = new Player();
+    m_trafficDetector = new TrafficDetector();
     createConnection();
 }
 
 Controller::~Controller()
 {
     delete m_player;
+    delete m_trafficDetector;
 }
 
 void Controller::createConnection()
@@ -29,6 +31,9 @@ void Controller::createConnection()
     connect(&m_window,SIGNAL(viewSliderMoved(int)),this,SLOT(controlOnSliderMoved(int)));
     connect(this,SIGNAL(controlFrameChange(QString)),&m_window,SLOT(viewOnFrameChange(QString)));
     connect(&m_window,SIGNAL(viewChangeFrameRate(QString)),this,SLOT(controlOnChangeFrameRate(QString)));
+
+    connect(m_player, SIGNAL(sendFrameToProcess(QImage*)), m_trafficDetector, SLOT(receiveFrameToProcess(QImage*)));
+    connect(m_trafficDetector, SIGNAL(sendProcessedFrame(QImage*)), &m_window, SLOT(viewOnProcessedFrame(QImage*)));
 }
 
 void Controller::startApplication()

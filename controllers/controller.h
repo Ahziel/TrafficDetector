@@ -4,6 +4,7 @@
 #include <QObject>
 #include "views/mainwindow.h"
 #include "processing/player.h"
+#include "processing/trafficdetector.h"
 
 class Controller : public QObject
 {
@@ -38,8 +39,7 @@ public slots:
 private :
     MainWindow m_window;
     Player *m_player;
-
-
+    TrafficDetector *m_trafficDetector;
 
 };
 
