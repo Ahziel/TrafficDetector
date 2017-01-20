@@ -18,6 +18,5 @@ void TrafficDetector::receiveFrameToProcess(QImage* frame){
 //    uchar *data;
 //    QImage *finalFrame = IplImageToQImage(processedFrame, &data);
 
-    qDebug() << "coucou";
     emit sendProcessedFrame(frame);
 }

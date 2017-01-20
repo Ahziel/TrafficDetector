@@ -42,6 +42,7 @@ public slots:
     void viewOnProcessedFrame(QImage* frame);
     void viewOnFrameChange(QString);
     void viewOnChangeFrameRate(QString);
+    void viewOnClickedStop();
 
 signals :
     void viewClickedLoad();
@@ -52,7 +53,7 @@ signals :
     void viewSliderMoved(int);
     void viewChangeFrameRate(QString);
     void viewGetNameVideoLoad(QString filename);
-
+    void viewClickedStop();
 
 };
 

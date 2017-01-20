@@ -23,6 +23,7 @@ void MainWindow::createConnection()
     connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
     connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
     connect(ui->frameRate,SIGNAL(currentIndexChanged(QString)),this,SLOT(viewOnChangeFrameRate(QString)));
+    connect(ui->stopButton,SIGNAL(clicked()),this,SLOT(viewOnClickedStop()));
 }
 
 void MainWindow::creation()
@@ -136,4 +137,9 @@ void MainWindow::viewOnFrameChange(QString current)
 void MainWindow::viewOnChangeFrameRate(QString val)
 {
     emit viewChangeFrameRate(val);
+}
+
+void MainWindow::viewOnClickedStop()
+{
+    emit viewClickedStop();
 }
