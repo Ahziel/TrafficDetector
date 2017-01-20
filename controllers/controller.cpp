@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), m_window(window)
+Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), m_window(window),m_playerState(false)
 {
     m_player = new Player();
     m_trafficDetector = new TrafficDetector();
@@ -15,6 +15,10 @@ Controller::~Controller()
     delete m_trafficDetector;
 }
 
+/*
+ * Fonction pour initialiser les différentes connexions à la création
+ *
+ */
 void Controller::createConnection()
 {
     connect(&m_window,SIGNAL(viewClickedLoad()),this,SLOT(controlOnClickedLoad()));
@@ -33,6 +37,8 @@ void Controller::createConnection()
     connect(&m_window,SIGNAL(viewChangeFrameRate(QString)),this,SLOT(controlOnChangeFrameRate(QString)));
     connect(m_player, SIGNAL(sendFrameToProcess(QImage*)), m_trafficDetector, SLOT(receiveFrameToProcess(QImage*)));
     connect(m_trafficDetector, SIGNAL(sendProcessedFrame(QImage*)), &m_window, SLOT(viewOnProcessedFrame(QImage*)));
+    connect(&m_window,SIGNAL(viewClickedStop()), this, SLOT(controlOnClickedStop()));
+    connect(this,SIGNAL(controlStopPlay()),&m_window,SLOT(viewOnStop()));
 }
 
 void Controller::startApplication()
@@ -61,16 +67,16 @@ void Controller::controlOnClickedLoad()
 
 void Controller::controlOnClickedPlay()
 {
-    bool play = true;
-    if (m_player->isStopped())
+    if (!m_playerState)
     {
         m_player->Play();
-        play = false;
+        m_playerState = !m_playerState;
     }else
     {
         m_player->Stop();
+        m_playerState = !m_playerState;
     }
-    emit controlChangeButtonPlay(play);
+    emit controlChangeButtonPlay(!m_playerState);
 }
 
 void Controller::controlOnSliderPressed()
@@ -80,7 +86,10 @@ void Controller::controlOnSliderPressed()
 
 void Controller::controlOnSliderReleased()
 {
-    m_player->Play();
+    if(m_playerState)
+    {
+       m_player->Play();
+    }
 }
 
 void Controller::controlOnSliderMoved(int current)
@@ -114,4 +123,12 @@ void Controller::controlOnGetNameVideo(QString filename)
 void Controller::controlOnChangeFrameRate(QString val)
 {
     m_player->setFrameRate(val.toDouble()*m_player->getOriginalFrameRate());
+}
+
+void Controller::controlOnClickedStop()
+{
+    m_player->setCurrentFrame(0);
+    m_player->Stop();
+    m_playerState = false;
+    emit controlStopPlay();
 }

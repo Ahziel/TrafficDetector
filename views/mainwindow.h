@@ -43,6 +43,7 @@ public slots:
     void viewOnFrameChange(QString);
     void viewOnChangeFrameRate(QString);
     void viewOnClickedStop();
+    void viewOnStop();
 
 signals :
     void viewClickedLoad();

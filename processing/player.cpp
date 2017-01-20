@@ -32,7 +32,6 @@ void Player::Play()
 
 void Player::run()
 {
-    //int delay = ;
     while(!stop){
         if (!capture->read(frame))
         {

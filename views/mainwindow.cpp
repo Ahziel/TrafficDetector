@@ -15,6 +15,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*
+ * Fonction pour initialiser les différentes connexions à la création
+ *
+ */
 void MainWindow::createConnection()
 {
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
@@ -110,6 +114,7 @@ void MainWindow::viewOnSuccededLoad(QString filename, double numberOfFrames, QSt
     QFileInfo name = filename;
     this->setWindowTitle(name.fileName());
     ui->playButton->setEnabled(true);
+    ui->stopButton->setEnabled(true);
     ui->horizontalSlider->setEnabled(true);
     ui->horizontalSlider->setMaximum(numberOfFrames);
     ui->totalTime->setText(formatedTime);
@@ -142,4 +147,14 @@ void MainWindow::viewOnChangeFrameRate(QString val)
 void MainWindow::viewOnClickedStop()
 {
     emit viewClickedStop();
+}
+
+void MainWindow::viewOnStop()
+{
+    QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+    QIcon ButtonIcon(pixmap);
+    ui->horizontalSlider->setValue(0);
+    ui->playButton->setIcon(ButtonIcon);
+    ui->video->clear();
+    ui->video_2->clear();
 }

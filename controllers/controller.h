@@ -24,6 +24,7 @@ signals:
     void controlChangeButtonPlay(bool play);
     void controlUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
     void controlFrameChange(QString placement);
+    void controlStopPlay();
 
 
 public slots:
@@ -35,11 +36,13 @@ public slots:
     void controlOnUpdatePlayer(QImage img);
     void controlOnGetNameVideo(QString filename);
     void controlOnChangeFrameRate(QString);
+    void controlOnClickedStop();
 
 private :
     MainWindow m_window;
     Player *m_player;
     TrafficDetector *m_trafficDetector;
+    bool m_playerState;
 
 };
 
