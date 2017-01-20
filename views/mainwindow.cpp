@@ -21,13 +21,8 @@ void MainWindow::createConnection()
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
     connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
     connect(ui->horizontalSlider,SIGNAL(sliderReleased()),this,SLOT(viewOnSliderReleased()));
-<<<<<<< HEAD
     connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
     connect(ui->frameRate,SIGNAL(currentIndexChanged(QString)),this,SLOT(viewOnChangeFrameRate(QString)));
-=======
-    connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)), this, SLOT(viewOnSliderMoved(int)));
-    connect(ui->frameRate,SIGNAL(valueChanged(double)),this,SLOT(viewOnChangeFrameRate(double)));
->>>>>>> aaa264186b44d580931f114b5567fe9a1424d912
 }
 
 void MainWindow::creation()
