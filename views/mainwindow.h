@@ -7,6 +7,10 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTime>
+#include <QTextEdit>
+#include <QMessageBox>
+#include <QDialog>
+
 
 
 namespace Ui {
@@ -44,6 +48,8 @@ public slots:
     void viewOnChangeFrameRate(QString);
     void viewOnClickedStop();
     void viewOnStop();
+    void viewOnHelp();
+    void viewOnAbout();
 
 signals :
     void viewClickedLoad();

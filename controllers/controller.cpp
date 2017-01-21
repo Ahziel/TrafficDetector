@@ -103,7 +103,7 @@ void Controller::controlOnUpdatePlayer(QImage img)
 {
     if (!img.isNull())
         {
-            emit controlUpdatePlayer(img,m_player->getCurrentFrame(),getFormattedTime( (int)m_player->getCurrentFrame()/(int)m_player->getOriginalFrameRate()));
+            emit controlUpdatePlayer(img,m_player->getCurrentFrame(),getFormattedTime( (int)(m_player->getCurrentFrame()/m_player->getOriginalFrameRate())));
         }
 }
 
@@ -115,7 +115,7 @@ void Controller::controlOnGetNameVideo(QString filename)
                 emit controlErrorLoad();
             }
             else{
-                emit controlSuccededLoad(filename,m_player->getNumberOfFrames(),getFormattedTime( (int)m_player->getNumberOfFrames()/(int)m_player->getFrameRate()));
+                emit controlSuccededLoad(filename,m_player->getNumberOfFrames(),getFormattedTime( (int)(m_player->getNumberOfFrames()/m_player->getFrameRate())));
             }
     }
 }

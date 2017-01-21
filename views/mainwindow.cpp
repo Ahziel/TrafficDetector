@@ -28,6 +28,9 @@ void MainWindow::createConnection()
     connect(ui->horizontalSlider,SIGNAL(sliderMoved(int)),this,SLOT(viewOnSliderMoved(int)));
     connect(ui->frameRate,SIGNAL(currentIndexChanged(QString)),this,SLOT(viewOnChangeFrameRate(QString)));
     connect(ui->stopButton,SIGNAL(clicked()),this,SLOT(viewOnClickedStop()));
+    connect(ui->actionAbout_Qt,SIGNAL(triggered()),qApp,SLOT(aboutQt()));
+    connect(ui->actionHelp,SIGNAL(triggered()),this,SLOT(viewOnHelp()));
+    connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
 }
 
 void MainWindow::creation()
@@ -157,4 +160,14 @@ void MainWindow::viewOnStop()
     ui->playButton->setIcon(ButtonIcon);
     ui->video->clear();
     ui->video_2->clear();
+}
+
+void MainWindow::viewOnHelp()
+{
+
+}
+
+void MainWindow::viewOnAbout()
+{
+
 }
