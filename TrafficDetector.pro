@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets webkit webkitwidgets
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 
@@ -20,10 +20,12 @@ SOURCES += main.cpp\
     views/mainwindow.cpp \
     processing/player.cpp \
     controllers/controller.cpp \
-    processing/trafficdetector.cpp
+    processing/trafficdetector.cpp \
+    views/help.cpp
 
 
-FORMS    += views/mainwindow.ui
+FORMS    += views/mainwindow.ui \
+    views/help.ui
 
 INCLUDEPATH += /usr/include/opencv
 
@@ -37,6 +39,7 @@ HEADERS += \
     processing/qtipl.h \
     views/mainwindow.h \
     controllers/controller.h \
-    processing/trafficdetector.h
+    processing/trafficdetector.h \
+    views/help.h
 
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
+

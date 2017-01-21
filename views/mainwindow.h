@@ -11,6 +11,8 @@
 #include <QMessageBox>
 #include <QDialog>
 
+#include "help.h"
+
 
 
 namespace Ui {
@@ -27,6 +29,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Help *helpwindow;
 
     void createConnection();
     void creation();
@@ -50,6 +53,7 @@ public slots:
     void viewOnStop();
     void viewOnHelp();
     void viewOnAbout();
+    void viewOnHelpQuit();
 
 signals :
     void viewClickedLoad();

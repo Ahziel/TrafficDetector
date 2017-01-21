@@ -40,6 +40,10 @@
   <property name="windowTitle">
    <string>Traffic Detector</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../car-compact.png</normaloff>../car-compact.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
