@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>820</width>
-    <height>390</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>820</width>
-    <height>390</height>
+    <height>370</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>820</width>
-    <height>390</height>
+    <height>370</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -61,6 +61,9 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="topMargin">
+      <number>10</number>
+     </property>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="sizeConstraint">
@@ -410,12 +413,11 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="menuCreate"/>
-    <addaction name="menuOpen"/>
-    <addaction name="menuClose"/>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
     <addaction name="separator"/>
-    <addaction name="menuSave"/>
-    <addaction name="actionSave_As"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -432,14 +434,6 @@
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="menuCreate">
    <property name="text">
@@ -449,7 +443,7 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="menuOpen">
+  <action name="actionOpen">
    <property name="text">
     <string>Open Project</string>
    </property>
@@ -457,12 +451,12 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="menuClose">
+  <action name="actionClose">
    <property name="text">
     <string>Close Project</string>
    </property>
   </action>
-  <action name="menuSave">
+  <action name="actionSave">
    <property name="text">
     <string>Save </string>
    </property>
@@ -470,7 +464,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionSave_As">
+  <action name="actionSaveAs">
    <property name="text">
     <string>Save As</string>
    </property>
@@ -502,6 +496,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New Project</string>
    </property>
   </action>
  </widget>

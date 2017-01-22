@@ -29,8 +29,10 @@ public:
 	IplImage* calculus(IplImage* p_pImage, IplImage* p_pImageMask = NULL);
 
 	
+    float getGamma() const;
+
 public slots:
-	void newImage(IplImage*);
+    void newImage(IplImage*);
 	void setGamma(float p_fGamma);
 
 signals:

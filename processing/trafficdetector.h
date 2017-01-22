@@ -33,6 +33,11 @@ public:
     explicit TrafficDetector(QObject *parent = 0);
     ~TrafficDetector();
 
+    float getGamma() const;
+    double getThreshold() const;
+    int getDilation() const;
+    int getErosion() const;
+
 signals:
     void sendMotionFrame(QImage* motionFrame);
     void sendBackgroundFrame(QImage* backgroundFrame);

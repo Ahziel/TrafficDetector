@@ -16,6 +16,27 @@ TrafficDetector::TrafficDetector(QObject *parent) : QObject(parent)
     createConnections();
 }
 
+
+float TrafficDetector::getGamma() const
+{
+    return m_backgroundDetector->getGamma();
+}
+
+double TrafficDetector::getThreshold() const
+{
+    return m_threshold;
+}
+
+int TrafficDetector::getDilation() const
+{
+    return m_dilation;
+}
+
+int TrafficDetector::getErosion() const
+{
+    return m_erosion;
+}
+
 void TrafficDetector::createConnections()
 {
     connect(m_motionDetector, SIGNAL(calculusNewImage(IplImage*)), this, SLOT(receiveMotionFrame(IplImage*)));

@@ -5,6 +5,7 @@
 #include "views/mainwindow.h"
 #include "processing/player.h"
 #include "processing/trafficdetector.h"
+#include "models/projectmodel.h"
 
 class Controller : public QObject
 {
@@ -33,6 +34,10 @@ signals:
     void controlVehiculesCounted(int vehicules);
 
 public slots:
+    void controlOnNewProject();
+    void controlOnOpenProject(QString filename);
+    void controlOnSaveProject();
+    void controlOnSaveAsProject(QString filename);
     void controlOnClickedLoad();
     void controlOnClickedPlay();
     void controlOnSliderPressed();
@@ -53,6 +58,7 @@ private :
     MainWindow m_window;
     Player *m_player;
     TrafficDetector *m_trafficDetector;
+    ProjectModel* m_projectModel;
     bool m_playerState;
 
 };

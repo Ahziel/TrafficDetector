@@ -27,6 +27,10 @@ MainWindow::~MainWindow()
  */
 void MainWindow::createConnection()
 {
+    connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(viewOnNewProject()));
+    connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(viewOnOpenProject()));
+    connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(viewOnSaveProject()));
+    connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(viewOnSaveAsProject()));
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
     connect(ui->horizontalSlider,SIGNAL(sliderPressed()),this,SLOT(viewOnSliderPressed()));
@@ -63,6 +67,34 @@ void MainWindow::creation()
     QIcon ButtonIconStop(pixmapStop);
     ui->stopButton->setIcon(ButtonIconStop);
 
+}
+
+void MainWindow::viewOnNewProject()
+{
+    emit viewNewProject();
+}
+
+void MainWindow::viewOnOpenProject()
+{
+    QString filename = QFileDialog::getOpenFileName(this,
+                                              tr("Open Project"), ".",
+                                              tr("Project Files (*.xml)"));
+
+    emit viewOpenProject(filename);
+}
+
+void MainWindow::viewOnSaveProject()
+{
+    emit viewSaveProject();
+}
+
+void MainWindow::viewOnSaveAsProject()
+{
+    QString filename = QFileDialog::getOpenFileName(this,
+                                              tr("Save Project"), ".",
+                                              tr("Project Files (*.xml)"));
+
+    emit viewSaveAsProject(filename);
 }
 
 void MainWindow::viewOnClickedLoad()

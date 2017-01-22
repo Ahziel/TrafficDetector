@@ -6,6 +6,7 @@ Controller::Controller(MainWindow * window, QObject *parent) : QObject(parent), 
 {
     m_player = new Player();
     m_trafficDetector = new TrafficDetector();
+    m_projectModel = new ProjectModel();
     createConnection();
 }
 
@@ -13,6 +14,7 @@ Controller::~Controller()
 {
     delete m_player;
     delete m_trafficDetector;
+    delete m_projectModel;
 }
 
 /*
@@ -21,6 +23,11 @@ Controller::~Controller()
  */
 void Controller::createConnection()
 {
+    connect(&m_window, SIGNAL(viewNewProject()), this, SLOT(controlOnNewProject()));
+    connect(&m_window, SIGNAL(viewOpenProject(QString)), this, SLOT(controlOnOpenProject(QString)));
+    connect(&m_window, SIGNAL(viewSaveProject()), this, SLOT(controlOnSaveProject()));
+    connect(&m_window, SIGNAL(viewSaveAsProject(QString)), this, SLOT(controlOnSaveAsProject(QString)));
+
     connect(&m_window,SIGNAL(viewClickedLoad()),this,SLOT(controlOnClickedLoad()));
     connect(this,SIGNAL(controlOpenLoadVideo()),&m_window,SLOT(viewOnLoadVideo()));
     connect(&m_window,SIGNAL(viewGetNameVideoLoad(QString)),this , SLOT(controlOnGetNameVideo(QString)));
@@ -70,6 +77,31 @@ QString Controller::getFormattedTime(int timeInSeconds)
             return t.toString("mm:ss");
         else
             return t.toString("h:mm:ss");
+}
+
+void Controller::controlOnNewProject()
+{
+    //#TODO demander si il faut sauver
+    //reset le projet
+    //reset la vue
+}
+
+void Controller::controlOnOpenProject(QString filename)
+{
+   //#TODO demander si il faut sauver
+   //charger config
+   //update la vue
+}
+
+void Controller::controlOnSaveProject()
+{
+    //TODO sauver la config
+}
+
+void Controller::controlOnSaveAsProject(QString filename)
+{
+    //TODO rename le fichier de config
+    // sauver la config
 }
 
 void Controller::controlOnClickedLoad()

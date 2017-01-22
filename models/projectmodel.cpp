@@ -4,11 +4,12 @@
 #include <QXmlStreamReader>
 #include <QDebug>
 
-ProjectModel::ProjectModel(QString name, QString videoFileLocation)
+ProjectModel::ProjectModel()
 {
-    m_name = name;
-    m_configFileLocation = name.append(".xml");
-    m_videoFileLocation = videoFileLocation;
+    m_name = "New_Project";
+    m_configFileLocation = m_name.append(".xml");
+    // remmplacer par un setter qui rajoute tjr le .xml
+    m_videoFileLocation = "";
 
 }
 
@@ -31,8 +32,13 @@ bool ProjectModel::saveConfig()
     QXmlStreamWriter xmlWriter(&file);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
-    xmlWriter.writeStartElement("TrafficDetectorConfig");
+    xmlWriter.writeStartElement("TrafficDetectorProjectConfig");
+    xmlWriter.writeTextElement("ProjectName", m_name);
     xmlWriter.writeTextElement("VideoFileLocation", m_videoFileLocation);
+    xmlWriter.writeTextElement("TrafficDetectorGamma", QString::number(m_trafficDetector->getGamma()));
+    xmlWriter.writeTextElement("TrafficDetectorThreshold", QString::number(m_trafficDetector->getThreshold()));
+    xmlWriter.writeTextElement("TrafficDetectorDilation", QString::number(m_trafficDetector->getDilation()));
+    xmlWriter.writeTextElement("TrafficDetectorErosion", QString::number(m_trafficDetector->getErosion()));
     xmlWriter.writeEndDocument();
     file.close();
 

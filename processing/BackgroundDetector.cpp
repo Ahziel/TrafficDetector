@@ -20,6 +20,11 @@ void CBackgroundDetector::setGamma(float p_fGamma)
 	this->m_fGamma = p_fGamma;
 }
 
+float CBackgroundDetector::getGamma() const
+{
+    return m_fGamma;
+}
+
 IplImage* CBackgroundDetector::calculus(IplImage* p_pImage, IplImage* p_pImageMask) 
 {
 
