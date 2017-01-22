@@ -39,6 +39,8 @@ void Controller::createConnection()
     connect(m_trafficDetector, SIGNAL(sendProcessedFrame(QImage*)), &m_window, SLOT(viewOnProcessedFrame(QImage*)));
     connect(&m_window,SIGNAL(viewClickedStop()), this, SLOT(controlOnClickedStop()));
     connect(this,SIGNAL(controlStopPlay()),&m_window,SLOT(viewOnStop()));
+    connect(&m_window, SIGNAL(viewGammaChanged(double)), this, SLOT(controlOnGammaChanged(double)));
+    connect(this, SIGNAL(controlGammaChanged(double)), m_trafficDetector, SLOT(receiveSetBackgroundDetectorGamma(double)));
 }
 
 void Controller::startApplication()
@@ -131,4 +133,9 @@ void Controller::controlOnClickedStop()
     m_player->Stop();
     m_playerState = false;
     emit controlStopPlay();
+}
+
+void Controller::controlOnGammaChanged(double gamma)
+{
+    emit controlGammaChanged(gamma);
 }

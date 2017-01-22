@@ -42,4 +42,7 @@ HEADERS += \
     processing/trafficdetector.h \
     views/help.h
 
+RESOURCES += \
+    icons.qrc
+
 

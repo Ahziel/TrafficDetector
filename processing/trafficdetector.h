@@ -17,6 +17,7 @@ private:
     IplImage* m_iplFrameGray;
     CMotionDetector* m_motionDetector;
     CBackgroundDetector* m_backgroundDetector;
+    double m_threshold;
 
     void createConnections();
 
@@ -27,6 +28,8 @@ public:
     explicit TrafficDetector(QObject *parent = 0);
     ~TrafficDetector();
 
+    void setThreshold(double threshold);
+
 signals:
     void sendMotionFrame(QImage* backgroundFrame);
     void sendProcessedFrame(QImage* processedFrame);
@@ -35,7 +38,7 @@ signals:
 public slots:
     void receiveFrameToProcess(QImage frame);
     void receiveMotionFrame(IplImage* motion);
-    void receiveSetBackgroundDetectorGamma(float gamma);
+    void receiveSetBackgroundDetectorGamma(double gamma);
 
 };
 

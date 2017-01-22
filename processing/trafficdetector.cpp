@@ -8,8 +8,14 @@ TrafficDetector::TrafficDetector(QObject *parent) : QObject(parent)
 {
     m_motionDetector = new CMotionDetector();
     m_backgroundDetector = new CBackgroundDetector();
+    m_threshold = 128;
 
     createConnections();
+}
+
+void TrafficDetector::setThreshold(double threshold)
+{
+    m_threshold = threshold;
 }
 
 void TrafficDetector::createConnections()
@@ -88,22 +94,26 @@ void TrafficDetector::receiveFrameToProcess(QImage frame)
     cvCvtColor(m_iplFrame, m_iplFrameGray, CV_BGR2GRAY);
     m_motionDetector->newImage(m_iplFrame);
 
-//    emit sendProcessedFrame(&frame);
-
 }
 
 void TrafficDetector::receiveMotionFrame(IplImage* motion)
 {
     IplImage* iplFrameBackground = m_backgroundDetector->calculus(m_iplFrame, motion);
-    IplImage* iplProcessedFrame = cvCreateImage(cvSize(m_iplFrame->width, m_iplFrame->height), IPL_DEPTH_8U, 1);
-    cvAbsDiff(m_iplFrameGray, iplFrameBackground, iplProcessedFrame);
 
-    QImage processedFrame = iplImage2QImage(motion);
+    cv::Mat matFrameBackground(iplFrameBackground);
+    cv::Mat matFrameGray(m_iplFrameGray);
+    cv::Mat matProcessedFrame;
+
+    cv::absdiff(matFrameGray, matFrameBackground, matProcessedFrame);
+    cv::threshold(matProcessedFrame, matProcessedFrame, m_threshold, 255, 0);
+
+    IplImage iplProcessedFrame = matProcessedFrame;
+    QImage processedFrame = iplImage2QImage(&iplProcessedFrame);
     emit sendProcessedFrame(&processedFrame);
 }
 
-void TrafficDetector::receiveSetBackgroundDetectorGamma(float gamma)
+void TrafficDetector::receiveSetBackgroundDetectorGamma(double gamma)
 {
-    emit sendSetBackgroundDetectorGamma(gamma);
+    qDebug() << (float) gamma;
+    emit sendSetBackgroundDetectorGamma((float) gamma);
 }
-

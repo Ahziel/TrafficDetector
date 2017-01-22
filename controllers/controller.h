@@ -25,6 +25,7 @@ signals:
     void controlUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
     void controlFrameChange(QString placement);
     void controlStopPlay();
+    void controlGammaChanged(double gamma);
 
 
 public slots:
@@ -37,6 +38,7 @@ public slots:
     void controlOnGetNameVideo(QString filename);
     void controlOnChangeFrameRate(QString);
     void controlOnClickedStop();
+    void controlOnGammaChanged(double gamma);
 
 private :
     MainWindow m_window;
