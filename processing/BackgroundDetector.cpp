@@ -23,7 +23,7 @@ void CBackgroundDetector::setGamma(float p_fGamma)
 IplImage* CBackgroundDetector::calculus(IplImage* p_pImage, IplImage* p_pImageMask) 
 {
 
-	if (m_pImage_Gray == NULL)
+    if (m_pImage_Gray == NULL)
 	{
 		m_pImage_Gray = cvCreateImage(cvSize(p_pImage->width, p_pImage->height), IPL_DEPTH_8U, 1);
 		

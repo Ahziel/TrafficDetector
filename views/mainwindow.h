@@ -10,6 +10,7 @@
 #include <QTextEdit>
 #include <QMessageBox>
 #include <QDialog>
+#include <QSpinBox>
 
 #include "help.h"
 
@@ -54,6 +55,7 @@ public slots:
     void viewOnHelp();
     void viewOnAbout();
     void viewOnHelpQuit();
+    void viewOnGammaChanged(double gamma);
 
 signals :
     void viewClickedLoad();
@@ -65,6 +67,7 @@ signals :
     void viewChangeFrameRate(QString);
     void viewGetNameVideoLoad(QString filename);
     void viewClickedStop();
+    void viewGammaChanged(double gamma);
 
 };
 

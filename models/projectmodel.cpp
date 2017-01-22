@@ -60,7 +60,7 @@ bool ProjectModel::loadConfig()
 
         if(token == QXmlStreamReader::StartElement){
             if(xmlReader.name() == "VideoFileLocation"){
-                qDebug() << "[DEBUG]ProjectModel::loadConfig(): Read element "<< xmlReader.name() << " containing " << xmlReader.readElementText();
+               // qDebug() << "[DEBUG]ProjectModel::loadConfig(): Read element "<< xmlReader.name() << " containing " << xmlReader.readElementText();
             }
 
             //#TODO Add the rest of the elements (consider using a hashmap ?)

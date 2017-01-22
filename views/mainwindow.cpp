@@ -1,6 +1,8 @@
 #include "views/mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -37,19 +39,22 @@ void MainWindow::createConnection()
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
     connect(helpwindow,SIGNAL(helpQuit()),this,SLOT(viewOnHelpQuit()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(viewOnAbout()));
+    connect(ui->gamma_spinbox, SIGNAL(valueChanged(double)), this, SLOT(viewOnGammaChanged(double)));
 }
 
 void MainWindow::creation()
 {
+    Q_INIT_RESOURCE(icons);
+
     ui->playButton->setEnabled(false);
     ui->stopButton->setEnabled(false);
     ui->horizontalSlider->setEnabled(false);
     ui->totalTime->setText("0:00:00");
     ui->currentTime->setText("0:00:00");
-    QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+    QPixmap pixmap(QFile(":/play.png").fileName());
     QIcon ButtonIcon(pixmap);
     ui->playButton->setIcon(ButtonIcon);
-    QPixmap pixmapStop("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/stop.png");
+    QPixmap pixmapStop(QFile(":/stop.png").fileName());
     QIcon ButtonIconStop(pixmapStop);
     ui->stopButton->setIcon(ButtonIconStop);
 
@@ -91,12 +96,12 @@ void MainWindow::viewOnChangeButtonPlay(bool play)
 {
     if (play)
     {
-        QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+        QPixmap pixmap(QFile(":/play.png").fileName());
         QIcon ButtonIcon(pixmap);
         ui->playButton->setIcon(ButtonIcon);
     }else
     {
-        QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/pause.png");
+        QPixmap pixmap(QFile(":/pause.png").fileName());
         QIcon ButtonIcon(pixmap);
         ui->playButton->setIcon(ButtonIcon);
     }
@@ -137,7 +142,7 @@ void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString curr
     ui->currentTime->setText(currentFrameText);
 }
 
-void MainWindow::viewOnProcessedFrame(QImage *frame)
+void MainWindow::viewOnProcessedFrame(QImage* frame)
 {
     ui->video_2->setAlignment(Qt::AlignCenter);
     ui->video_2->setPixmap(QPixmap::fromImage(*frame).scaled(ui->video_2->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
@@ -160,7 +165,7 @@ void MainWindow::viewOnClickedStop()
 
 void MainWindow::viewOnStop()
 {
-    QPixmap pixmap("/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/play.png");
+    QPixmap pixmap(QFile(":/play.png").fileName());
     QIcon ButtonIcon(pixmap);
     ui->horizontalSlider->setValue(0);
     ui->playButton->setIcon(ButtonIcon);
@@ -181,4 +186,9 @@ void MainWindow::viewOnAbout()
 void MainWindow::viewOnHelpQuit()
 {
     helpwindow->hide();
+}
+
+void MainWindow::viewOnGammaChanged(double gamma)
+{
+    emit viewGammaChanged(gamma);
 }
