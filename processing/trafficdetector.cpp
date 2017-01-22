@@ -8,14 +8,12 @@ TrafficDetector::TrafficDetector(QObject *parent) : QObject(parent)
 {
     m_motionDetector = new CMotionDetector();
     m_backgroundDetector = new CBackgroundDetector();
-    m_threshold = 128;
+    m_threshold = 50;
+    m_output = 0;
+    m_dilation = 2;
+    m_erosion = 2;
 
     createConnections();
-}
-
-void TrafficDetector::setThreshold(double threshold)
-{
-    m_threshold = threshold;
 }
 
 void TrafficDetector::createConnections()
@@ -98,22 +96,126 @@ void TrafficDetector::receiveFrameToProcess(QImage frame)
 
 void TrafficDetector::receiveMotionFrame(IplImage* motion)
 {
-    IplImage* iplFrameBackground = m_backgroundDetector->calculus(m_iplFrame, motion);
+    // Motion ouput
+    QImage motionFrame = iplImage2QImage(motion);
+    //-----
 
+    // Background output
+    IplImage* iplFrameBackground = m_backgroundDetector->calculus(m_iplFrame, motion);
+    QImage backgroundFrame = iplImage2QImage(iplFrameBackground);
+    // ------
+
+    // Processing
+    // ======
     cv::Mat matFrameBackground(iplFrameBackground);
     cv::Mat matFrameGray(m_iplFrameGray);
     cv::Mat matProcessedFrame;
 
+    // Thresholding
     cv::absdiff(matFrameGray, matFrameBackground, matProcessedFrame);
-    cv::threshold(matProcessedFrame, matProcessedFrame, m_threshold, 255, 0);
+    cv::threshold(matProcessedFrame, matProcessedFrame, m_threshold, 255, CV_THRESH_BINARY);
 
-    IplImage iplProcessedFrame = matProcessedFrame;
-    QImage processedFrame = iplImage2QImage(&iplProcessedFrame);
-    emit sendProcessedFrame(&processedFrame);
+    // Morphological operations
+    cv::Mat dilationElement = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(m_dilation, m_dilation));
+    cv::Mat erossionElement = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(m_erosion, m_erosion));
+
+    cv::dilate(matProcessedFrame, matProcessedFrame, dilationElement);
+    cv::dilate(matProcessedFrame, matProcessedFrame, dilationElement);
+    cv::erode(matProcessedFrame, matProcessedFrame, erossionElement);
+    cv::erode(matProcessedFrame, matProcessedFrame, erossionElement);
+
+    cv::dilate(matProcessedFrame, matProcessedFrame, dilationElement);
+    cv::dilate(matProcessedFrame, matProcessedFrame, dilationElement);
+    cv::erode(matProcessedFrame, matProcessedFrame, erossionElement);
+
+    // Outline research
+    std::vector<std::vector<cv::Point>> outlines;
+    cv::Mat matOutlineFrame = matProcessedFrame.clone();
+
+    cv::findContours(matOutlineFrame, outlines, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+
+    // Outline output
+    IplImage iplOutlineFrame = matOutlineFrame;
+    QImage outlineFrame = iplImage2QImage(&iplOutlineFrame);
+    // -----
+
+    // Counting vehicules
+    int count = 0;
+    for(auto outline : outlines)
+    {
+        if(outline.size() > 40)
+        {
+            count++;
+        }
+    }
+
+    if(m_counter.size() == 29)
+    {
+        m_counter.pop_back();
+    }
+
+    m_counter.push_front(count);
+
+    int sum = 0;
+    for(int c : m_counter)
+    {
+        sum += c;
+    }
+
+    emit countedVehicules(sum / m_counter.size());
+    // -----
+
+    switch (m_output) {
+    case 0: //background
+        emit sendProcessedFrame(&backgroundFrame);
+        break;
+    case 1: //outline
+        emit sendProcessedFrame(&outlineFrame);
+        break;
+    case 2: //shape
+        emit sendProcessedFrame(&motionFrame);
+        break;
+    default:
+        break;
+    }
 }
 
 void TrafficDetector::receiveSetBackgroundDetectorGamma(double gamma)
 {
-    qDebug() << (float) gamma;
     emit sendSetBackgroundDetectorGamma((float) gamma);
+}
+
+void TrafficDetector::receiveSetThreshold(int threshold)
+{
+    qDebug() << threshold;
+    if(m_threshold != threshold)
+    {
+        m_threshold = threshold;
+    }
+}
+
+void TrafficDetector::receiveSetDilation(int dilation)
+{
+    qDebug() << dilation;
+    if(m_dilation != dilation)
+    {
+        m_dilation = dilation;
+    }
+}
+
+void TrafficDetector::receiveSetErosion(int erosion)
+{
+    qDebug() << erosion;
+    if(m_erosion != erosion)
+    {
+        m_erosion = erosion;
+    }
+}
+
+void TrafficDetector::receiveOutputChange(int index)
+{
+    if(m_output != index)
+    {
+        m_output = index;
+    }
 }

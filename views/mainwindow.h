@@ -11,10 +11,10 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QSpinBox>
+#include <QComboBox>
+#include <QLCDNumber>
 
 #include "help.h"
-
-
 
 namespace Ui {
 class MainWindow;
@@ -55,7 +55,12 @@ public slots:
     void viewOnHelp();
     void viewOnAbout();
     void viewOnHelpQuit();
+    void viewOnOutputChanged(int index);
     void viewOnGammaChanged(double gamma);
+    void viewOnThresholdChanged(int threshold);
+    void viewOnDilationChanged(int dilation);
+    void viewOnErosionChanged(int erosion);
+    void viewOnCountedVehicules(int vehicules);
 
 signals :
     void viewClickedLoad();
@@ -68,6 +73,10 @@ signals :
     void viewGetNameVideoLoad(QString filename);
     void viewClickedStop();
     void viewGammaChanged(double gamma);
+    void viewThresholdChanged(int threshold);
+    void viewDilationChanged(int dilation);
+    void viewErosionChanged(int erosion);
+    void viewOutputChanged(int index);
 
 };
 

@@ -25,8 +25,12 @@ signals:
     void controlUpdatePlayer(QImage img,double currentFrame, QString currentFrameText);
     void controlFrameChange(QString placement);
     void controlStopPlay();
+    void controlOutputChanged(int index);
     void controlGammaChanged(double gamma);
-
+    void controlThresholdChanged(int threshold);
+    void controlDilationChanged(int dilation);
+    void controlErosionChanged(int erosion);
+    void controlVehiculesCounted(int vehicules);
 
 public slots:
     void controlOnClickedLoad();
@@ -38,7 +42,12 @@ public slots:
     void controlOnGetNameVideo(QString filename);
     void controlOnChangeFrameRate(QString);
     void controlOnClickedStop();
+    void controlOnOutputChanged(int index);
     void controlOnGammaChanged(double gamma);
+    void controlOnThresholdChanged(int threshold);
+    void controlOnDilationChanged(int dilation);
+    void controlOnErosionChanged(int erosion);
+    void controlOnVehiculesCounted(int vehicules);
 
 private :
     MainWindow m_window;

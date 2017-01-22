@@ -38,7 +38,12 @@ void MainWindow::createConnection()
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
     connect(helpwindow,SIGNAL(helpQuit()),this,SLOT(viewOnHelpQuit()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(viewOnAbout()));
+    connect(ui->output_combobox, SIGNAL(currentIndexChanged(int)), this, SLOT(viewOnOutputChanged(int)));
     connect(ui->gamma_spinbox, SIGNAL(valueChanged(double)), this, SLOT(viewOnGammaChanged(double)));
+    connect(ui->threshold_spinbox, SIGNAL(valueChanged(int)), this, SLOT(viewOnThresholdChanged(int)));
+    connect(ui->dilation_spinbox, SIGNAL(valueChanged(int)), this, SLOT(viewOnDilationChanged(int)));
+    connect(ui->erosion_spinbox, SIGNAL(valueChanged(int)), this, SLOT(viewOnErosionChanged(int)));
+
 }
 
 void MainWindow::creation()
@@ -187,7 +192,32 @@ void MainWindow::viewOnHelpQuit()
     helpwindow->hide();
 }
 
+void MainWindow::viewOnOutputChanged(int index)
+{
+    emit viewOutputChanged(index);
+}
+
 void MainWindow::viewOnGammaChanged(double gamma)
 {
     emit viewGammaChanged(gamma);
+}
+
+void MainWindow::viewOnThresholdChanged(int threshold)
+{
+    emit viewThresholdChanged(threshold);
+}
+
+void MainWindow::viewOnDilationChanged(int dilation)
+{
+    emit viewDilationChanged(dilation);
+}
+
+void MainWindow::viewOnErosionChanged(int erosion)
+{
+    emit viewErosionChanged(erosion);
+}
+
+void MainWindow::viewOnCountedVehicules(int vehicules)
+{
+    ui->vehicules_counter->display(vehicules);
 }

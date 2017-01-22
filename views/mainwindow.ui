@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>814</width>
+    <width>820</width>
     <height>390</height>
    </rect>
   </property>
@@ -21,14 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>549</width>
+    <width>820</width>
     <height>390</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>820</width>
+    <height>390</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -262,7 +262,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLCDNumber" name="lcdNumber"/>
+          <widget class="QLCDNumber" name="vehicules_counter"/>
          </item>
         </layout>
        </item>
@@ -301,13 +301,10 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QDoubleSpinBox" name="dilation_spinbox"/>
-         </item>
          <item row="1" column="1">
           <widget class="QDoubleSpinBox" name="gamma_spinbox">
            <property name="maximum">
-            <double>1.000000000000000</double>
+            <double>0.990000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.050000000000000</double>
@@ -324,12 +321,6 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QDoubleSpinBox" name="erosion_spinbox"/>
-         </item>
-         <item row="2" column="1">
-          <widget class="QDoubleSpinBox" name="threshold_spinbox"/>
-         </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_7">
            <property name="text">
@@ -338,7 +329,7 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="output_combobox">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Processing Display&lt;/p&gt;&lt;p&gt;Choose what image display for the processing&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -357,6 +348,30 @@
              <string>Shape</string>
             </property>
            </item>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="threshold_spinbox">
+           <property name="maximum">
+            <number>255</number>
+           </property>
+           <property name="value">
+            <number>50</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QSpinBox" name="dilation_spinbox">
+           <property name="value">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QSpinBox" name="erosion_spinbox">
+           <property name="value">
+            <number>2</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -387,7 +402,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>814</width>
+     <width>820</width>
      <height>20</height>
     </rect>
    </property>

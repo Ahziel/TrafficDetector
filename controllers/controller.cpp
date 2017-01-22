@@ -41,6 +41,16 @@ void Controller::createConnection()
     connect(this,SIGNAL(controlStopPlay()),&m_window,SLOT(viewOnStop()));
     connect(&m_window, SIGNAL(viewGammaChanged(double)), this, SLOT(controlOnGammaChanged(double)));
     connect(this, SIGNAL(controlGammaChanged(double)), m_trafficDetector, SLOT(receiveSetBackgroundDetectorGamma(double)));
+    connect(&m_window, SIGNAL(viewThresholdChanged(int)), this, SLOT(controlOnThresholdChanged(int)));
+    connect(this, SIGNAL(controlThresholdChanged(int)), m_trafficDetector, SLOT(receiveSetThreshold(int)));
+    connect(&m_window, SIGNAL(viewDilationChanged(int)), this, SLOT(controlOnDilationChanged(int)));
+    connect(this, SIGNAL(controlDilationChanged(int)), m_trafficDetector, SLOT(receiveSetDilation(int)));
+    connect(&m_window, SIGNAL(viewErosionChanged(int)), this, SLOT(controlOnErosionChanged(int)));
+    connect(this, SIGNAL(controlErosionChanged(int)), m_trafficDetector, SLOT(receiveSetErosion(int)));
+    connect(&m_window, SIGNAL(viewOutputChanged(int)), this, SLOT(controlOnOutputChanged(int)));
+    connect(this, SIGNAL(controlOutputChanged(int)), m_trafficDetector, SLOT(receiveOutputChange(int)));
+    connect(m_trafficDetector, SIGNAL(countedVehicules(int)), this, SLOT(controlOnVehiculesCounted(int)));
+    connect(this, SIGNAL(controlVehiculesCounted(int)), &m_window, SLOT(viewOnCountedVehicules(int)));
 }
 
 void Controller::startApplication()
@@ -135,7 +145,32 @@ void Controller::controlOnClickedStop()
     emit controlStopPlay();
 }
 
+void Controller::controlOnOutputChanged(int index)
+{
+    emit controlOutputChanged(index);
+}
+
 void Controller::controlOnGammaChanged(double gamma)
 {
     emit controlGammaChanged(gamma);
+}
+
+void Controller::controlOnThresholdChanged(int threshold)
+{
+    emit controlThresholdChanged(threshold);
+}
+
+void Controller::controlOnDilationChanged(int dilation)
+{
+    emit controlDilationChanged(dilation);
+}
+
+void Controller::controlOnErosionChanged(int erosion)
+{
+    emit controlErosionChanged(erosion);
+}
+
+void Controller::controlOnVehiculesCounted(int vehicules)
+{
+    emit controlVehiculesCounted(vehicules);
 }
