@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QMessageBox>
+#include <QFile>
 
 namespace Ui {
 class Help;
@@ -16,6 +17,8 @@ public:
     explicit Help(QDialog *parent = 0);
     ~Help();
 
+    void setText(QString address);
+    QString readFile(QString filename);
 private slots:
     void on_pushButton_clicked();
 

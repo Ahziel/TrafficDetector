@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     creation();
     createConnection();
     helpwindow->hide();
+    helpwindow->setText("qrc:/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/help.txt");
 
 }
 
