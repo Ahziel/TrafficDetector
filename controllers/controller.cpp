@@ -35,7 +35,7 @@ void Controller::createConnection()
     connect(&m_window,SIGNAL(viewSliderMoved(int)),this,SLOT(controlOnSliderMoved(int)));
     connect(this,SIGNAL(controlFrameChange(QString)),&m_window,SLOT(viewOnFrameChange(QString)));
     connect(&m_window,SIGNAL(viewChangeFrameRate(QString)),this,SLOT(controlOnChangeFrameRate(QString)));
-    connect(m_player, SIGNAL(sendFrameToProcess(QImage*)), m_trafficDetector, SLOT(receiveFrameToProcess(QImage*)));
+    connect(m_player, SIGNAL(processedImage(QImage)), m_trafficDetector, SLOT(receiveFrameToProcess(QImage)));
     connect(m_trafficDetector, SIGNAL(sendProcessedFrame(QImage*)), &m_window, SLOT(viewOnProcessedFrame(QImage*)));
     connect(&m_window,SIGNAL(viewClickedStop()), this, SLOT(controlOnClickedStop()));
     connect(this,SIGNAL(controlStopPlay()),&m_window,SLOT(viewOnStop()));

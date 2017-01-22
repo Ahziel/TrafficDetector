@@ -37,18 +37,22 @@ void Player::run()
         {
             stop = true;
         }
-        if (frame.channels()== 3){
-            cv::cvtColor(frame, RGBframe, CV_BGR2RGB);
-            img = QImage((const unsigned char*)(RGBframe.data),
-                              RGBframe.cols,RGBframe.rows,QImage::Format_RGB888);
-        }
         else
         {
-            img = QImage((const unsigned char*)(frame.data),
-                                 frame.cols,frame.rows,QImage::Format_Indexed8);
+            if (frame.channels()== 3){
+                cv::cvtColor(frame, RGBframe, CV_BGR2RGB);
+                img = QImage((const unsigned char*)(RGBframe.data),
+                                  RGBframe.cols,RGBframe.rows,QImage::Format_RGB888);
+            }
+            else
+            {
+                img = QImage((const unsigned char*)(frame.data),
+                                     frame.cols,frame.rows,QImage::Format_Indexed8);
+            }
+            emit processedImage(img);
+//            emit sendFrameToProcess(&img);
+
         }
-        emit processedImage(img);
-        emit sendFrameToProcess(&img);
         this->msleep((1000/frameRate));
     }
 }

@@ -131,7 +131,7 @@ void MainWindow::viewOnUpdatePlayer(QImage img,double currentFrame, QString curr
     ui->currentTime->setText(currentFrameText);
 }
 
-void MainWindow::viewOnProcessedFrame(QImage *frame)
+void MainWindow::viewOnProcessedFrame(QImage* frame)
 {
     ui->video_2->setAlignment(Qt::AlignCenter);
     ui->video_2->setPixmap(QPixmap::fromImage(*frame).scaled(ui->video_2->size(),Qt::KeepAspectRatio, Qt::FastTransformation));
