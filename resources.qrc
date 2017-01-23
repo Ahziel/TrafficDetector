@@ -4,5 +4,6 @@
         <file>play.png</file>
         <file>stop.png</file>
         <file>help.txt</file>
+        <file>car-compact.png</file>
     </qresource>
 </RCC>

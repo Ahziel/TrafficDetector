@@ -41,8 +41,8 @@
    <string>Traffic Detector</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../car-compact.png</normaloff>../car-compact.png</iconset>
+   <iconset resource="../resources.qrc">
+    <normaloff>:/car-compact.png</normaloff>:/car-compact.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -503,6 +503,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
