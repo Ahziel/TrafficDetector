@@ -14,12 +14,13 @@ private:
     TrafficDetector* m_trafficDetector;
 
 public:
-    ProjectModel();
+    ProjectModel(TrafficDetector* trafficDetector);
     ProjectModel(QString configFileLocation);
 
     bool loadConfig();
     bool saveConfig();
 
+    void setConfigFileLocation(const QString &configFileLocation);
 };
 
 #endif // PROJECTMODEL_H

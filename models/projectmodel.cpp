@@ -4,8 +4,9 @@
 #include <QXmlStreamReader>
 #include <QDebug>
 
-ProjectModel::ProjectModel()
+ProjectModel::ProjectModel(TrafficDetector* trafficDetector)
 {
+    m_trafficDetector = trafficDetector;
     m_name = "New_Project";
     m_configFileLocation = m_name.append(".xml");
     // remmplacer par un setter qui rajoute tjr le .xml
@@ -19,6 +20,11 @@ ProjectModel::ProjectModel(QString configFileLocation)
     loadConfig();
 }
 
+void ProjectModel::setConfigFileLocation(const QString &configFileLocation)
+{
+    m_configFileLocation = configFileLocation;
+}
+
 bool ProjectModel::saveConfig()
 {
     QFile file(m_configFileLocation);
@@ -30,6 +36,7 @@ bool ProjectModel::saveConfig()
     }
 
     QXmlStreamWriter xmlWriter(&file);
+
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("TrafficDetectorProjectConfig");

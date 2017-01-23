@@ -27,9 +27,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::createConnection()
 {
-    connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(viewOnNewProject()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(viewOnOpenProject()));
-    connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(viewOnSaveProject()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(viewOnSaveAsProject()));
     connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(viewOnClickedLoad()));
     connect(ui->playButton,SIGNAL(clicked()),this,SLOT(viewOnClickedPlay()));
@@ -69,11 +67,6 @@ void MainWindow::creation()
 
 }
 
-void MainWindow::viewOnNewProject()
-{
-    emit viewNewProject();
-}
-
 void MainWindow::viewOnOpenProject()
 {
     QString filename = QFileDialog::getOpenFileName(this,
@@ -83,14 +76,9 @@ void MainWindow::viewOnOpenProject()
     emit viewOpenProject(filename);
 }
 
-void MainWindow::viewOnSaveProject()
-{
-    emit viewSaveProject();
-}
-
 void MainWindow::viewOnSaveAsProject()
 {
-    QString filename = QFileDialog::getOpenFileName(this,
+    QString filename = QFileDialog::getSaveFileName(this,
                                               tr("Save Project"), ".",
                                               tr("Project Files (*.xml)"));
 

@@ -36,9 +36,7 @@ private:
     void creation();
 
 public slots:
-    void viewOnNewProject();
     void viewOnOpenProject();
-    void viewOnSaveProject();
     void viewOnSaveAsProject();
     void viewOnClickedLoad();
     void viewOnClickedPlay();
@@ -67,9 +65,7 @@ public slots:
     void viewOnCountedVehicules(int vehicules);
 
 signals :
-    void viewNewProject();
     void viewOpenProject(QString filename);
-    void viewSaveProject();
     void viewSaveAsProject(QString filename);
     void viewClickedLoad();
     void viewClickedPlay();

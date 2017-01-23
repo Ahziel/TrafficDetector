@@ -34,9 +34,7 @@ signals:
     void controlVehiculesCounted(int vehicules);
 
 public slots:
-    void controlOnNewProject();
     void controlOnOpenProject(QString filename);
-    void controlOnSaveProject();
     void controlOnSaveAsProject(QString filename);
     void controlOnClickedLoad();
     void controlOnClickedPlay();
