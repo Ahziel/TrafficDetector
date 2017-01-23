@@ -10,7 +10,6 @@ class ProjectModel
 private:
     QString m_configFileLocation;
     QString m_videoFileLocation;
-    QString m_name;
     TrafficDetector* m_trafficDetector;
 
 public:
@@ -21,6 +20,8 @@ public:
     bool saveConfig();
 
     void setConfigFileLocation(const QString &configFileLocation);
+    QString getVideoFileLocation() const;
+    void setVideoFileLocation(const QString &videoFileLocation);
 };
 
 #endif // PROJECTMODEL_H

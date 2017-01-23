@@ -7,9 +7,7 @@
 ProjectModel::ProjectModel(TrafficDetector* trafficDetector)
 {
     m_trafficDetector = trafficDetector;
-    m_name = "New_Project";
-    m_configFileLocation = m_name.append(".xml");
-    // remmplacer par un setter qui rajoute tjr le .xml
+    m_configFileLocation = "";
     m_videoFileLocation = "";
 
 }
@@ -23,6 +21,16 @@ ProjectModel::ProjectModel(QString configFileLocation)
 void ProjectModel::setConfigFileLocation(const QString &configFileLocation)
 {
     m_configFileLocation = configFileLocation;
+}
+
+QString ProjectModel::getVideoFileLocation() const
+{
+    return m_videoFileLocation;
+}
+
+void ProjectModel::setVideoFileLocation(const QString &videoFileLocation)
+{
+    m_videoFileLocation = videoFileLocation;
 }
 
 bool ProjectModel::saveConfig()
@@ -40,7 +48,6 @@ bool ProjectModel::saveConfig()
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("TrafficDetectorProjectConfig");
-    xmlWriter.writeTextElement("ProjectName", m_name);
     xmlWriter.writeTextElement("VideoFileLocation", m_videoFileLocation);
     xmlWriter.writeTextElement("TrafficDetectorGamma", QString::number(m_trafficDetector->getGamma()));
     xmlWriter.writeTextElement("TrafficDetectorThreshold", QString::number(m_trafficDetector->getThreshold()));
@@ -73,10 +80,34 @@ bool ProjectModel::loadConfig()
 
         if(token == QXmlStreamReader::StartElement){
             if(xmlReader.name() == "VideoFileLocation"){
-               // qDebug() << "[DEBUG]ProjectModel::loadConfig(): Read element "<< xmlReader.name() << " containing " << xmlReader.readElementText();
+               m_videoFileLocation = xmlReader.readElementText();
             }
 
-            //#TODO Add the rest of the elements (consider using a hashmap ?)
+
+            if(xmlReader.name() == "TrafficDetectorGamma"){
+               double gamma = xmlReader.readElementText().toDouble();
+               m_trafficDetector->setGamma(gamma);
+            }
+
+
+            if(xmlReader.name() == "TrafficDetectorThreshold"){
+               double threshold = xmlReader.readElementText().toDouble();
+               m_trafficDetector->setThreshold(threshold);
+            }
+
+
+            if(xmlReader.name() == "TrafficDetectorDilation"){
+               int dilation = xmlReader.readElementText().toInt();
+               m_trafficDetector->setDilation(dilation);
+            }
+
+
+            if(xmlReader.name() == "TrafficDetectorErosion"){
+               int erosion = xmlReader.readElementText().toInt();
+               m_trafficDetector->setErosion(erosion);
+            }
+
+
         }
     }
 

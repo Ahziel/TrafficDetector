@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     creation();
     createConnection();
     helpwindow->hide();
-    helpwindow->setText("qrc:/home/ahziel/Documents/ESIR2/IHM/TrafficDetector/help.txt");
 
 }
 
@@ -51,7 +50,7 @@ void MainWindow::createConnection()
 
 void MainWindow::creation()
 {
-    Q_INIT_RESOURCE(icons);
+    Q_INIT_RESOURCE(resources);
 
     ui->playButton->setEnabled(false);
     ui->stopButton->setEnabled(false);
@@ -64,6 +63,8 @@ void MainWindow::creation()
     QPixmap pixmapStop(QFile(":/stop.png").fileName());
     QIcon ButtonIconStop(pixmapStop);
     ui->stopButton->setIcon(ButtonIconStop);
+    helpwindow->setWindowTitle("Help");
+    helpwindow->setText(":/help.txt");
 
 }
 
@@ -241,4 +242,24 @@ void MainWindow::viewOnErosionChanged(int erosion)
 void MainWindow::viewOnCountedVehicules(int vehicules)
 {
     ui->vehicules_counter->display(vehicules);
+}
+
+void MainWindow::viewOnChangedGamma(double gamma)
+{
+    ui->gamma_spinbox->setValue(gamma);
+}
+
+void MainWindow::viewOnChangedThreshold(double threshold)
+{
+    ui->threshold_spinbox->setValue(threshold);
+}
+
+void MainWindow::viewOnChangedDilation(int dilation)
+{
+    ui->dilation_spinbox->setValue(dilation);
+}
+
+void MainWindow::viewOnChangedErosion(int erosion)
+{
+    ui->erosion_spinbox->setValue(erosion);
 }

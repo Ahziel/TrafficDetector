@@ -38,12 +38,22 @@ public:
     int getDilation() const;
     int getErosion() const;
 
+    void setGamma(double gamma);
+    void setThreshold(double threshold);
+    void setOutput(int output);
+    void setDilation(int dilation);
+    void setErosion(int erosion);
+
 signals:
     void sendMotionFrame(QImage* motionFrame);
     void sendBackgroundFrame(QImage* backgroundFrame);
     void sendProcessedFrame(QImage* processedFrame);
     void sendSetBackgroundDetectorGamma(float gamma);
     void countedVehicules(int vehicules);
+    void sendChangedGamma(double gamma);
+    void sendChangedThreshold(double threshold);
+    void sendChangedDilation(int dilation);
+    void sendChangedErosion(int erosion);
 
 public slots:
     void receiveFrameToProcess(QImage frame);

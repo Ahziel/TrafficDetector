@@ -32,6 +32,11 @@ signals:
     void controlDilationChanged(int dilation);
     void controlErosionChanged(int erosion);
     void controlVehiculesCounted(int vehicules);
+    void controlSendVideoName(QString filename);
+    void sendChangedGamma(double gamma);
+    void sendChangedThreshold(double threshold);
+    void sendChangedErosion(int erosion);
+    void sendChangedDilation(int dilation);
 
 public slots:
     void controlOnOpenProject(QString filename);
@@ -51,6 +56,10 @@ public slots:
     void controlOnDilationChanged(int dilation);
     void controlOnErosionChanged(int erosion);
     void controlOnVehiculesCounted(int vehicules);
+    void receiveChangedGamma(double gamma);
+    void receiveChangedThreshold(double threshold);
+    void receiveChangedDilation(int dilation);
+    void receiveChangedErosion(int erosion);
 
 private :
     MainWindow m_window;

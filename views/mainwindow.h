@@ -63,6 +63,10 @@ public slots:
     void viewOnDilationChanged(int dilation);
     void viewOnErosionChanged(int erosion);
     void viewOnCountedVehicules(int vehicules);
+    void viewOnChangedGamma(double gamma);
+    void viewOnChangedThreshold(double threshold);
+    void viewOnChangedDilation(int dilation);
+    void viewOnChangedErosion(int erosion);
 
 signals :
     void viewOpenProject(QString filename);

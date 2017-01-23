@@ -406,7 +406,7 @@
      <x>0</x>
      <y>0</y>
      <width>820</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -467,7 +467,7 @@
     <string>Save As</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionQuit">

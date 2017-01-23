@@ -57,6 +57,21 @@ void Controller::createConnection()
     connect(this, SIGNAL(controlOutputChanged(int)), m_trafficDetector, SLOT(receiveOutputChange(int)));
     connect(m_trafficDetector, SIGNAL(countedVehicules(int)), this, SLOT(controlOnVehiculesCounted(int)));
     connect(this, SIGNAL(controlVehiculesCounted(int)), &m_window, SLOT(viewOnCountedVehicules(int)));
+
+    connect(this, SIGNAL(controlSendVideoName(QString)), this, SLOT(controlOnGetNameVideo(QString)));
+
+    connect(m_trafficDetector, SIGNAL(sendChangedGamma(double)), this, SLOT(receiveChangedGamma(double)));
+    connect(this, SIGNAL(sendChangedGamma(double)), &m_window, SLOT(viewOnChangedGamma(double)));
+
+    connect(m_trafficDetector, SIGNAL(sendChangedThreshold(double)), this, SLOT(receiveChangedThreshold(double)));
+    connect(this, SIGNAL(sendChangedThreshold(double)), &m_window, SLOT(viewOnChangedThreshold(double)));
+
+    connect(m_trafficDetector, SIGNAL(sendChangedDilation(int)), this, SLOT(receiveChangedDilation(int)));
+    connect(this, SIGNAL(sendChangedDilation(int)), &m_window, SLOT(viewOnChangedDilation(int)));
+
+    connect(m_trafficDetector, SIGNAL(sendChangedErosion(int)), this, SLOT(receiveChangedErosion(int)));
+    connect(this, SIGNAL(sendChangedErosion(int)), &m_window, SLOT(viewOnChangedErosion(int)));
+
 }
 
 void Controller::startApplication()
@@ -80,9 +95,9 @@ QString Controller::getFormattedTime(int timeInSeconds)
 
 void Controller::controlOnOpenProject(QString filename)
 {
-   //#TODO demander si il faut sauver
-   //charger config
-   //update la vue
+    m_projectModel->setConfigFileLocation(filename);
+    m_projectModel->loadConfig();
+    emit controlSendVideoName(m_projectModel->getVideoFileLocation());
 }
 
 void Controller::controlOnSaveAsProject(QString filename)
@@ -146,6 +161,8 @@ void Controller::controlOnGetNameVideo(QString filename)
                 emit controlErrorLoad();
             }
             else{
+
+                m_projectModel->setVideoFileLocation(filename);
                 emit controlSuccededLoad(filename,m_player->getNumberOfFrames(),getFormattedTime( (int)(m_player->getNumberOfFrames()/m_player->getFrameRate())));
             }
     }
@@ -192,4 +209,24 @@ void Controller::controlOnErosionChanged(int erosion)
 void Controller::controlOnVehiculesCounted(int vehicules)
 {
     emit controlVehiculesCounted(vehicules);
+}
+
+void Controller::receiveChangedGamma(double gamma)
+{
+    emit sendChangedGamma(gamma);
+}
+
+void Controller::receiveChangedThreshold(double threshold)
+{
+    emit sendChangedThreshold(threshold);
+}
+
+void Controller::receiveChangedDilation(int dilation)
+{
+    emit sendChangedDilation(dilation);
+}
+
+void Controller::receiveChangedErosion(int erosion)
+{
+    emit sendChangedErosion(erosion);
 }

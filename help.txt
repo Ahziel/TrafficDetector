@@ -1,2 +1,11 @@
-<h1>This is a heading</h1>
-<p>This is a paragraph.</p>
+<h1>Help</h1>
+<ul>
+	<li>Load a video by clicking on the "Load" button</li>
+	<li>The original video is displayed on the left,</tr>the processed video is on the right</li>
+	<li>The process step diplayed can be changed thanks</tr>to the select box on the right</li>
+	<li>You can play, pause, stop, accelerate and slow </tr>thanks to the buttons below the player</li>
+	<li>By dragging the cursor you can advance or go back</tr> in the video</li>
+	<li>You can tweak parameters on the right on the window</li>
+	<li>You can save your work in a XML file using "Save As"</tr> in the "File" menu</li>
+	<li>A saved work can be reopenned using "Open" in the </tr>"File" menu, and selecting a saved XML</li>
+</ul>

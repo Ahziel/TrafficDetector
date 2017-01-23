@@ -37,6 +37,35 @@ int TrafficDetector::getErosion() const
     return m_erosion;
 }
 
+void TrafficDetector::setGamma(double gamma)
+{
+    emit sendSetBackgroundDetectorGamma((float) gamma);
+    emit sendChangedGamma(gamma);
+}
+
+void TrafficDetector::setThreshold(double threshold)
+{
+    m_threshold = threshold;
+    emit sendChangedThreshold(threshold);
+}
+
+void TrafficDetector::setOutput(int output)
+{
+    m_output = output;
+}
+
+void TrafficDetector::setDilation(int dilation)
+{
+    m_dilation = dilation;
+    emit sendChangedDilation(dilation);
+}
+
+void TrafficDetector::setErosion(int erosion)
+{
+    m_erosion = erosion;
+    emit sendChangedErosion(erosion);
+}
+
 void TrafficDetector::createConnections()
 {
     connect(m_motionDetector, SIGNAL(calculusNewImage(IplImage*)), this, SLOT(receiveMotionFrame(IplImage*)));
@@ -208,7 +237,6 @@ void TrafficDetector::receiveSetBackgroundDetectorGamma(double gamma)
 
 void TrafficDetector::receiveSetThreshold(int threshold)
 {
-    qDebug() << threshold;
     if(m_threshold != threshold)
     {
         m_threshold = threshold;
@@ -217,7 +245,6 @@ void TrafficDetector::receiveSetThreshold(int threshold)
 
 void TrafficDetector::receiveSetDilation(int dilation)
 {
-    qDebug() << dilation;
     if(m_dilation != dilation)
     {
         m_dilation = dilation;
@@ -226,7 +253,6 @@ void TrafficDetector::receiveSetDilation(int dilation)
 
 void TrafficDetector::receiveSetErosion(int erosion)
 {
-    qDebug() << erosion;
     if(m_erosion != erosion)
     {
         m_erosion = erosion;

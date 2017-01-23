@@ -6,6 +6,8 @@
 
 QT       += core gui widgets webkit webkitwidgets
 
+CONFIG += c++11
+
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 
 TARGET = TrafficDetector
@@ -43,6 +45,6 @@ HEADERS += \
     views/help.h
 
 RESOURCES += \
-    icons.qrc
+    resources.qrc
 
 
